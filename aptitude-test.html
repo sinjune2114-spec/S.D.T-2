@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aptitude Test | The Core Room</title>
+<style>
+  :root {
+    --bg-dark: #f5f0e4;
+    --bg-darker: #ffffff;
+    --accent: #8c1515;
+    --accent2: #b83232;
+    --text-light: #1a1a1a;
+    --text-dim: #4d4f53;
+    --sand: #d2c295;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    font-family: "Segoe UI", "Pretendard", sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,0.94); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(140,21,21,0.12);
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; height: 64px; max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  .logo { font-weight: 700; color: var(--text-light); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .back-link { font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+
+  .wrap { max-width: 640px; margin: 0 auto; padding: 50px 24px 100px; }
+  .intro h1 { font-size: 1.8rem; margin-bottom: 12px; }
+  .intro p { color: var(--text-dim); margin-bottom: 32px; }
+
+  .progress-bar { height: 6px; background: rgba(140,21,21,0.12); border-radius: 4px; margin-bottom: 36px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(135deg, var(--accent), var(--accent2)); transition: width 0.25s ease; }
+
+  .question { display: none; }
+  .question.active { display: block; animation: fade 0.25s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .q-count { font-size: 0.8rem; color: var(--accent); font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; }
+  .q-text { font-size: 1.25rem; font-weight: 700; margin-bottom: 26px; }
+
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .option {
+    display: block; background: #fff; border: 1px solid rgba(140,21,21,0.18);
+    border-radius: 12px; padding: 16px 18px; cursor: pointer; font-size: 0.96rem;
+    transition: all 0.15s ease;
+  }
+  .option:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .option.selected { background: rgba(140,21,21,0.08); border-color: var(--accent); font-weight: 600; }
+
+  .nav-btns { display: flex; justify-content: space-between; margin-top: 36px; }
+  .btn {
+    border: none; padding: 12px 26px; border-radius: 24px; font-weight: 700;
+    cursor: pointer; font-size: 0.92rem;
+  }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-secondary { background: transparent; color: var(--text-dim); }
+  .btn-secondary:disabled { opacity: 0; pointer-events: none; }
+
+  .result { display: none; text-align: center; }
+  .result.active { display: block; }
+  .result .badge {
+    display: inline-block; background: var(--accent); color: #fff; font-size: 0.8rem;
+    letter-spacing: 1px; padding: 6px 16px; border-radius: 20px; margin-bottom: 18px;
+  }
+  .result h2 { font-size: 1.7rem; margin-bottom: 14px; }
+  .result .desc { color: var(--text-dim); margin-bottom: 30px; }
+  .result .traits { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-bottom: 36px; text-align: left; }
+  .result .trait {
+    background: #fff; border: 1px solid rgba(140,21,21,0.15); border-radius: 12px; padding: 14px 16px;
+  }
+  .result .trait .label { font-size: 0.78rem; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+  .result .trait .value { font-size: 0.92rem; }
+  .result .cta-btn {
+    display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 28px; text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="logo" href="index.html">The <span>Core</span> Room</a>
+    <a class="back-link" href="index.html">← Back to landing page</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="intro">
+    <h1>🧠 Aptitude Test</h1>
+    <p>8 quick questions to map your cognitive style, values, and strengths. Just pick the option that feels most like you — no typing needed.</p>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <form id="quizForm">
+    <div class="question active" data-q="1">
+      <div class="q-count">QUESTION 1 / 8</div>
+      <div class="q-text">When facing a new problem, what's your first move?</div>
+      <div class="options">
+        <div class="option" data-value="analyst">Break it down into smaller, logical pieces</div>
+        <div class="option" data-value="connector">Talk it through with someone else first</div>
+        <div class="option" data-value="builder">Just start trying something and adjust as I go</div>
+        <div class="option" data-value="visionary">Step back and imagine what the ideal outcome looks like</div>
+      </div>
+    </div>
+
+    <div class="question" data-q="2">
+      <div class="q-count">QUESTION 2 / 8</div>
+      <div class="q-text">What kind of praise means the most to you?</div>
+      <div class="options">
+        <div class="option" data-value="analyst">"Your reasoning was really sharp."</div>
+        <div class="option" data-value="connector">"You really understood how I felt."</div>
+        <div class="option" data-value="builder">"You actually got it done."</div>
+        <div class="option" data-value="visionary">"That's such a creative idea."</div>
+      </div>
+    </div>
+
+    <div class="question" data-q="3">
+      <div class="q-count">QUESTION 3 / 8</div>
+      <div class="q-text">In a group project, you naturally end up...</div>
+      <div class="options">
+        <div class="option" data-value="analyst">Checking facts and catching mistakes</div>
+        <div class="option" data-value="connector">Making sure everyone's voice is heard</div>
+        <div class="option" data-value="builder">Pushing the team to actually finish things</div>
+        <div class="option" data-value="visionary">Pitching the big-picture direction</div>
+      </div>
+    </div>
+
+    <div class="question" data-q="4">
+      <div class="q-count">QUESTION 4 / 8</div>
+      <div class="q-text">What stresses you out the most?</div>
+      <div class="options">
+        <div class="option" data-value="analyst">Having to decide without enough information</div>
+        <div class="option" data-value="connector">Conflict or tension within a group</div>
+        <div class="option" data-value="builder">Talking about a plan forever without acting on it</div>
+        <div class="option" data-value="visionary">Being stuck doing the same repetitive task</div>
+      </div>
+    </div>
+
+    <div class="question" data-q="5">
+      <div class="q-count">QUESTION 5 / 8</div>
+      <div class="q-text">Which value matters most to you in choosing a career?</div>
+      <div class="options">
+        <div class="option" data-value="analyst">Precision and expertise</div>
+        <div class="option" data-value="connector">Impact on people and community</div>
+        <div class="option" data-value="builder">Tangible results and ownership</div>
+        <div class="option" data-value="visionary">Originality and new ideas</div>
+      </div>
+    </div>
+
+    <div class="question" data-q="6">
+      <div class="q-count">QUESTION 6 / 8</div>
+      <div class="q-text">What's your weekend recharge?</div>
+      <div class="options">
+        <div class="option" data-value="analyst">Reading or researching something deeply on your own</div>
+        <div class="option" data-value="connector">Hanging out and catching up with close friends</div>
+        <div class="option" data-value="builder">Working on a personal project or side hustle</div>
+        <div class="option" data-value="visionary">Exploring something completely new and unplanned</div>
+      </div>
+    </div>
+
+    <div class="question" data-q="7">
+      <div class="q-count">QUESTION 7 / 8</div>
+      <div class="q-text">When you make a decision, what do you trust most?</div>
+      <div class="options">
+        <div class="option" data-value="analyst">Data and evidence</div>
+        <div class="option" data-value="connector">How it will affect the people involved</div>
+        <div class="option" data-value="builder">What has actually worked before</div>
+        <div class="option" data-value="visionary">Your gut feeling about what's right</div>
+      </div>
+    </div>
+
+    <div class="question" data-q="8">
+      <div class="q-count">QUESTION 8 / 8</div>
+      <div class="q-text">What would your friends say is your biggest strength?</div>
+      <div class="options">
+        <div class="option" data-value="analyst">You think things through carefully</div>
+        <div class="option" data-value="connector">You make people feel understood</div>
+        <div class="option" data-value="builder">You get things done, no matter what</div>
+        <div class="option" data-value="visionary">You always see things differently</div>
+      </div>
+    </div>
+
+    <div class="nav-btns">
+      <button type="button" class="btn btn-secondary" id="prevBtn" disabled>← Back</button>
+      <button type="button" class="btn btn-primary" id="nextBtn" disabled>Next →</button>
+    </div>
+  </form>
+
+  <div class="result" id="resultBox">
+    <span class="badge">YOUR APTITUDE TYPE</span>
+    <h2 id="resultTitle"></h2>
+    <p class="desc" id="resultDesc"></p>
+    <div class="traits" id="resultTraits"></div>
+    <a class="cta-btn" href="index.html#scheduler">Book Your Escape Room Slot →</a>
+  </div>
+</div>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  const answers = {};
+  let current = 0;
+
+  const profiles = {
+    analyst: {
+      title: 'The Analyst 🔎',
+      desc: 'You lead with logic and precision. You make sense of complexity by breaking it down, and you\'re trusted to catch what others miss.',
+      traits: ['Critical Thinking', 'Attention to Detail', 'Independent Focus', 'Evidence-Based Decisions']
+    },
+    connector: {
+      title: 'The Connector 🤝',
+      desc: 'You lead with empathy and relationships. You sense what people need and you make groups feel safe enough to be honest.',
+      traits: ['Empathy', 'Team Harmony', 'Active Listening', 'Trust Building']
+    },
+    builder: {
+      title: 'The Builder 🛠️',
+      desc: 'You lead with action. You\'d rather try something imperfect than wait for the perfect plan, and you turn ideas into real outcomes.',
+      traits: ['Execution', 'Ownership', 'Practical Problem-Solving', 'Momentum']
+    },
+    visionary: {
+      title: 'The Visionary 💡',
+      desc: 'You lead with imagination. You see the bigger picture and the unconventional path, and you bring fresh energy to stuck situations.',
+      traits: ['Creativity', 'Big-Picture Thinking', 'Adaptability', 'Original Ideas']
+    }
+  };
+
+  function renderProgress() {
+    const pct = (current / questions.length) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  function showQuestion(idx) {
+    questions.forEach((q, i) => q.classList.toggle('active', i === idx));
+    document.getElementById('prevBtn').disabled = idx === 0;
+    const qNum = idx + 1;
+    const answered = !!answers[qNum];
+    document.getElementById('nextBtn').disabled = !answered;
+    document.getElementById('nextBtn').textContent = idx === questions.length - 1 ? 'See My Result →' : 'Next →';
+    renderProgress();
+  }
+
+  questions.forEach((q, idx) => {
+    const qNum = idx + 1;
+    q.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        q.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        answers[qNum] = opt.dataset.value;
+        document.getElementById('nextBtn').disabled = false;
+      });
+    });
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    if (current > 0) { current--; showQuestion(current); }
+  });
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    if (current < questions.length - 1) {
+      current++;
+      showQuestion(current);
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult() {
+    const counts = { analyst: 0, connector: 0, builder: 0, visionary: 0 };
+    Object.values(answers).forEach(v => counts[v]++);
+    const topType = Object.keys(counts).reduce((a, b) => counts[a] >= counts[b] ? a : b);
+    const profile = profiles[topType];
+
+    document.getElementById('quizForm').style.display = 'none';
+    document.querySelector('.progress-bar').style.display = 'none';
+    document.getElementById('resultTitle').textContent = profile.title;
+    document.getElementById('resultDesc').textContent = profile.desc;
+    document.getElementById('resultTraits').innerHTML = profile.traits
+      .map(t => `<div class="trait"><div class="label">CORE TRAIT</div><div class="value">${t}</div></div>`)
+      .join('');
+    document.getElementById('resultBox').classList.add('active');
+  }
+
+  showQuestion(current);
+</script>
+
+</body>
+</html>

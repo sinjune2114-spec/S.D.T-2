@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room Gallery | The Core Room</title>
+<style>
+  :root {
+    --bg-dark: #f5f0e4;
+    --bg-darker: #ffffff;
+    --accent: #8c1515;
+    --accent2: #b83232;
+    --text-light: #1a1a1a;
+    --text-dim: #4d4f53;
+    --sand: #d2c295;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg-darker);
+    color: var(--text-light);
+    font-family: "Segoe UI", "Pretendard", sans-serif;
+    line-height: 1.6;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,0.94); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(140,21,21,0.12);
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; height: 64px; max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  .logo { font-weight: 700; color: var(--text-light); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .back-link { font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+
+  .container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  .intro { text-align: center; padding: 60px 0 20px; }
+  .intro h1 { font-size: 2rem; margin-bottom: 12px; }
+  .intro p { color: var(--text-dim); max-width: 600px; margin: 0 auto; }
+
+  .gallery { padding: 40px 0 100px; display: flex; flex-direction: column; gap: 40px; }
+  .room-card {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center;
+    background: var(--bg-dark); border: 1px solid rgba(140,21,21,0.15);
+    border-radius: 20px; overflow: hidden;
+  }
+  .room-card:nth-of-type(even) { grid-template-columns: 1fr 1fr; }
+  .room-card:nth-of-type(even) .room-img { order: 2; }
+  .room-img {
+    aspect-ratio: 4/3; background: linear-gradient(135deg, rgba(140,21,21,0.18), rgba(210,194,149,0.5));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: var(--accent); font-weight: 700; letter-spacing: 1px;
+    text-align: center; padding: 24px;
+  }
+  .room-body { padding: 28px 32px 28px 0; }
+  .room-card:nth-of-type(even) .room-body { padding: 28px 0 28px 32px; }
+  .room-num {
+    display: inline-block; background: var(--accent); color: #fff; font-size: 0.78rem;
+    font-weight: 700; padding: 5px 14px; border-radius: 16px; margin-bottom: 14px;
+  }
+  .room-body h2 { font-size: 1.4rem; margin-bottom: 12px; }
+  .room-body p { color: var(--text-dim); font-size: 0.95rem; }
+
+  .cta-wrap { text-align: center; padding: 0 0 80px; }
+  .cta-btn {
+    display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; font-weight: 700; padding: 16px 38px; border-radius: 30px; text-decoration: none;
+  }
+
+  @media (max-width: 760px) {
+    .room-card, .room-card:nth-of-type(even) { grid-template-columns: 1fr; }
+    .room-card:nth-of-type(even) .room-img { order: 0; }
+    .room-body, .room-card:nth-of-type(even) .room-body { padding: 8px 24px 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="logo" href="index.html">The <span>Core</span> Room</a>
+    <a class="back-link" href="index.html">← Back to landing page</a>
+  </div>
+</nav>
+
+<div class="container intro">
+  <h1>🖼️ Inside the Rooms</h1>
+  <p>A closer look at each room before you book your slot. Photos coming soon — for now, here's what to expect.</p>
+</div>
+
+<div class="container gallery">
+  <div class="room-card">
+    <div class="room-img">ROOM 1 PHOTO<br>(coming soon)</div>
+    <div class="room-body">
+      <span class="room-num">ROOM 1</span>
+      <h2>The Decluttering Room</h2>
+      <p>Walls covered in to-do sticky notes for seminars, networking, internship prep, and workouts, hiding a numeric lock code. Tear off the right notes to reveal the code and move on.</p>
+    </div>
+  </div>
+
+  <div class="room-card">
+    <div class="room-img">ROOM 2 PHOTO<br>(coming soon)</div>
+    <div class="room-body">
+      <span class="room-num">ROOM 2</span>
+      <h2>The Mirror Room</h2>
+      <p>A touch-sensor mirror asks binary questions about what scares you most. Your choice unlocks a different safe behind the glass, becoming your Key Item for the next room.</p>
+    </div>
+  </div>
+
+  <div class="room-card">
+    <div class="room-img">ROOM 3 PHOTO<br>(coming soon)</div>
+    <div class="room-body">
+      <span class="room-num">ROOM 3</span>
+      <h2>The Core Design Studio</h2>
+      <p>A timeline board waits at the center of the room. Combine the Key Items and value cards collected from Rooms 1 and 2 to complete it and unlock the final door.</p>
+    </div>
+  </div>
+</div>
+
+<div class="cta-wrap">
+  <a class="cta-btn" href="index.html#scheduler">Book Your Slot →</a>
+</div>
+
+</body>
+</html>
