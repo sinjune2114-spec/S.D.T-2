@@ -281,6 +281,41 @@
   }
   .quest-item p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
 
+  /* ---------- puzzle routes (in-room missions) ---------- */
+  .puzzle-routes {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .puzzle-route {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .puzzle-route .pr-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #f3ece4;
+    margin-bottom: 4px;
+  }
+  .puzzle-route .pr-desc {
+    font-size: 0.84rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .puzzle-route .pr-signal {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--red);
+    background: rgba(224,36,60,0.1);
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+
   /* ---------- AI report ---------- */
   .report-mock {
     background: var(--card-bg);
@@ -296,10 +331,17 @@
     margin-bottom: 18px;
     letter-spacing: 1px;
   }
-  .bar-row { margin-bottom: 16px; }
-  .bar-row .label { font-size: 0.88rem; color: var(--text-dim); margin-bottom: 6px; display:flex; justify-content: space-between; }
-  .bar-track { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--red-deep), var(--red)); }
+  .hex-wrap {
+    display: flex;
+    justify-content: center;
+  }
+  .hex-wrap svg { width: 100%; max-width: 420px; height: auto; }
+  .hex-grid { fill: none; stroke: rgba(255,255,255,0.12); stroke-width: 1; }
+  .hex-axis { stroke: rgba(255,255,255,0.18); stroke-width: 1; }
+  .hex-score { fill: rgba(224,36,60,0.28); stroke: var(--red); stroke-width: 2.5; }
+  .hex-point { fill: var(--gold); }
+  .hex-label { fill: var(--text-dim); font-size: 11px; font-weight: 700; }
+  .hex-pct { fill: var(--gold); font-size: 10px; font-weight: 800; }
   .report-verdict {
     margin-top: 24px;
     padding-top: 20px;
@@ -528,24 +570,59 @@
   <div class="section-tag">Game Design · The Plan</div>
   <h2 class="section-title">4개의 방, 4개의 문<br>모든 선택이 너의 데이터가 된다</h2>
   <p class="section-desc">
-    각 방의 퍼즐은 단순히 "탈출"이 목적이 아니야. 네가 어떤 방식으로 문제를 풀고,
-    어디서 망설이고, 무엇에 몰입하는지를 기록해서 너의 행동 패턴을 읽어내는 게 진짜 목적이야.
+    각 방의 퍼즐은 단순히 "탈출"이 목적이 아니야. 같은 방 안에서도 여러 갈래의 미션이 동시에 열려있고,
+    네가 어떤 미션을 선택하고 어떻게 풀어내는지를 기록해서 행동 패턴을 읽어내는 게 진짜 목적이야.
+    예를 들어 미래에 자동차 엔지니어가 될 사람은 자연스럽게 휠 구동 기어 박스 퍼즐에 손이 먼저 가.
   </p>
   <div class="quest-list">
     <div class="quest-item">
       <div class="quest-num">01</div>
       <div>
         <h3>The Logic Vault — 논리의 방</h3>
-        <p>암호와 퍼즐을 순서대로 풀어야 다음 문이 열린다. 혼자 풀지, 팀원에게 묻지, 패턴을 먼저 찾는지를 추적.</p>
+        <p>암호와 기계 장치를 순서대로 풀어야 다음 문이 열린다. 같은 방이라도 어떤 미션을 선택하고 어떻게 접근하는지에 따라 다른 적성 신호가 기록된다.</p>
         <span class="quest-trait">분석적 사고 / 문제해결 스타일</span>
+        <div class="puzzle-routes">
+          <div class="puzzle-route">
+            <div class="pr-title">🔧 자동차 휠 구동 기어 박스</div>
+            <div class="pr-desc">톱니바퀴 3개의 조합을 맞춰 휠 축을 회전시켜야 잠금장치가 풀린다. 손으로 직접 만지고 구조를 추론하는 과정을 추적.</div>
+            <span class="pr-signal">→ 기계/엔지니어링 적성</span>
+          </div>
+          <div class="puzzle-route">
+            <div class="pr-title">🔌 배선 회로 복구</div>
+            <div class="pr-desc">색깔 코드를 따라 끊어진 전선을 연결해 전력을 복구해야 다음 문이 열린다.</div>
+            <span class="pr-signal">→ 시스템적 사고 적성</span>
+          </div>
+          <div class="puzzle-route">
+            <div class="pr-title">🔢 숫자 암호 자물쇠</div>
+            <div class="pr-desc">방 안의 단서들 사이 숨겨진 패턴을 찾아 4자리 코드를 추론한다.</div>
+            <span class="pr-signal">→ 논리적 추론 적성</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="quest-item">
       <div class="quest-num">02</div>
       <div>
         <h3>The Empty Stage — 표현의 방</h3>
-        <p>제한된 도구로 무언가를 만들거나 설명해야 통과되는 방. 정답이 없는 미션에서 너의 선택을 본다.</p>
+        <p>제한된 도구로 무언가를 만들거나 설명해야 통과되는 방. 정답이 없는 미션에서 네가 무엇을 고르는지를 본다.</p>
         <span class="quest-trait">창의성 / 표현 방식</span>
+        <div class="puzzle-routes">
+          <div class="puzzle-route">
+            <div class="pr-title">🎬 30초 탈출 영상 만들기</div>
+            <div class="pr-desc">주어진 클립 조각만으로 30초 스토리를 편집해 NPC에게 보여줘야 문이 열린다.</div>
+            <span class="pr-signal">→ 콘텐츠/미디어 적성</span>
+          </div>
+          <div class="puzzle-route">
+            <div class="pr-title">🎤 즉석 설득 스피치</div>
+            <div class="pr-desc">단 한 번의 30초 발언으로 문지기 NPC를 설득해야 통과된다.</div>
+            <span class="pr-signal">→ 커뮤니케이션 적성</span>
+          </div>
+          <div class="puzzle-route">
+            <div class="pr-title">🗺️ 즉석 탈출 지도 스케치</div>
+            <div class="pr-desc">기억만으로 지금까지 지나온 공간을 그려서 다음 팀에게 전달한다.</div>
+            <span class="pr-signal">→ 공간/디자인 적성</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="quest-item">
@@ -554,6 +631,23 @@
         <h3>The Trust Chamber — 협업의 방</h3>
         <p>팀원과 정보를 나눠 가진 상태에서만 풀리는 미션. 리드하는지, 따라가는지, 중재하는지를 기록.</p>
         <span class="quest-trait">리더십 / 협업 포지션</span>
+        <div class="puzzle-routes">
+          <div class="puzzle-route">
+            <div class="pr-title">👑 역할 분담 지휘</div>
+            <div class="pr-desc">제한 시간 안에 팀원에게 역할을 나눠주고 동시에 진행되는 3개 미션을 조율해야 한다.</div>
+            <span class="pr-signal">→ 리더십 적성</span>
+          </div>
+          <div class="puzzle-route">
+            <div class="pr-title">🤝 정보 조각 협상</div>
+            <div class="pr-desc">팀원마다 다른 단서 조각을 갖고 있어, 말로 정보를 교환해야 전체 그림이 완성된다.</div>
+            <span class="pr-signal">→ 협상/중재 적성</span>
+          </div>
+          <div class="puzzle-route">
+            <div class="pr-title">🧩 보조 힌트 전달</div>
+            <div class="pr-desc">자신의 미션보다 다른 팀원의 막힌 퍼즐을 먼저 도와줄 수도 있는 선택지가 있다.</div>
+            <span class="pr-signal">→ 지원/협력 적성</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="quest-item">
@@ -562,6 +656,23 @@
         <h3>The Last Door — 결단의 방</h3>
         <p>시간이 거의 다 됐을 때, 두 가지 선택 중 하나만 고를 수 있다. 압박 속에서의 의사결정 패턴을 본다.</p>
         <span class="quest-trait">위험 감수 성향 / 결단력</span>
+        <div class="puzzle-routes">
+          <div class="puzzle-route">
+            <div class="pr-title">⚡ 하이리스크 지름길</div>
+            <div class="pr-desc">실패하면 처음부터 다시 시작하지만, 성공하면 즉시 탈출하는 문을 선택할 수 있다.</div>
+            <span class="pr-signal">→ 위험 감수 적성</span>
+          </div>
+          <div class="puzzle-route">
+            <div class="pr-title">🛡️ 안전한 우회로</div>
+            <div class="pr-desc">시간은 더 걸리지만 실패 확률이 낮은 경로를 택할 수 있다.</div>
+            <span class="pr-signal">→ 리스크 관리 적성</span>
+          </div>
+          <div class="puzzle-route">
+            <div class="pr-title">🎯 마지막 정보 수집</div>
+            <div class="pr-desc">남은 5초 안에 추가 단서를 한 번 더 확인할지, 바로 결정할지를 선택해야 한다.</div>
+            <span class="pr-signal">→ 전략적 판단 적성</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -576,25 +687,47 @@
   </p>
   <div class="report-mock">
     <h3>🧠 YOUR ESCAPE PROFILE</h3>
-    <div class="bar-row">
-      <div class="label"><span>분석적 사고</span><span>82%</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
-    </div>
-    <div class="bar-row">
-      <div class="label"><span>창의적 표현</span><span>64%</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:64%"></div></div>
-    </div>
-    <div class="bar-row">
-      <div class="label"><span>협업 리더십</span><span>71%</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:71%"></div></div>
-    </div>
-    <div class="bar-row">
-      <div class="label"><span>위기 결단력</span><span>58%</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:58%"></div></div>
+    <div class="hex-wrap">
+      <svg viewBox="-40 -30 380 360" xmlns="http://www.w3.org/2000/svg">
+        <!-- grid hexagons (20/40/60/80/100%) -->
+        <polygon class="hex-grid" points="150,126 170.8,138 170.8,162 150,174 129.2,162 129.2,138"/>
+        <polygon class="hex-grid" points="150,102 191.6,126 191.6,174 150,198 108.4,174 108.4,126"/>
+        <polygon class="hex-grid" points="150,78 212.4,114 212.4,186 150,222 87.6,186 87.6,114"/>
+        <polygon class="hex-grid" points="150,54 233.1,102 233.1,198 150,246 66.9,198 66.9,102"/>
+        <polygon class="hex-grid" points="150,30 253.9,90 253.9,210 150,270 46.1,210 46.1,90"/>
+        <!-- axes -->
+        <line class="hex-axis" x1="150" y1="150" x2="150" y2="30"/>
+        <line class="hex-axis" x1="150" y1="150" x2="253.9" y2="90"/>
+        <line class="hex-axis" x1="150" y1="150" x2="253.9" y2="210"/>
+        <line class="hex-axis" x1="150" y1="150" x2="150" y2="270"/>
+        <line class="hex-axis" x1="150" y1="150" x2="46.1" y2="210"/>
+        <line class="hex-axis" x1="150" y1="150" x2="46.1" y2="90"/>
+        <!-- score polygon -->
+        <polygon class="hex-score" points="150,51.6 227.9,105 223.8,192.6 150,219.6 83.5,188.4 87.65,114"/>
+        <circle class="hex-point" cx="150" cy="51.6" r="3.5"/>
+        <circle class="hex-point" cx="227.9" cy="105" r="3.5"/>
+        <circle class="hex-point" cx="223.8" cy="192.6" r="3.5"/>
+        <circle class="hex-point" cx="150" cy="219.6" r="3.5"/>
+        <circle class="hex-point" cx="83.5" cy="188.4" r="3.5"/>
+        <circle class="hex-point" cx="87.65" cy="114" r="3.5"/>
+        <!-- labels -->
+        <text class="hex-label" x="150" y="6" text-anchor="middle">분석적 사고</text>
+        <text class="hex-pct" x="150" y="20" text-anchor="middle">82%</text>
+        <text class="hex-label" x="269.5" y="77" text-anchor="start">기계/엔지니어링</text>
+        <text class="hex-pct" x="269.5" y="91" text-anchor="start">75%</text>
+        <text class="hex-label" x="269.5" y="223" text-anchor="start">협업 리더십</text>
+        <text class="hex-pct" x="269.5" y="237" text-anchor="start">71%</text>
+        <text class="hex-label" x="150" y="300" text-anchor="middle">위기 결단력</text>
+        <text class="hex-pct" x="150" y="314" text-anchor="middle">58%</text>
+        <text class="hex-label" x="30.5" y="223" text-anchor="end">창의적 표현</text>
+        <text class="hex-pct" x="30.5" y="237" text-anchor="end">64%</text>
+        <text class="hex-label" x="30.5" y="77" text-anchor="end">커뮤니케이션</text>
+        <text class="hex-pct" x="30.5" y="91" text-anchor="end">60%</text>
+      </svg>
     </div>
     <div class="report-verdict">
       "당신은 <span>구조를 먼저 파악하고 움직이는 전략가형</span>입니다.
-      불확실함 속에서도 데이터를 모아 판단하는 걸 즐기는 타입이에요."
+      특히 기계 휠 퍼즐에서 보인 손동작과 추론 속도는 <span>기계/엔지니어링 적성</span>이 높다는 신호예요."
     </div>
   </div>
 </section>
