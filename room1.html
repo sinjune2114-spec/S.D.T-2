@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room 01: The Decluttering Room | The Core Room</title>
+<style>
+  :root { --accent: #8c1515; --accent2: #b83232; --sand: #d2c295; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: #0d0505; color: #f5f0e4; font-family: "Segoe UI", "Pretendard", sans-serif; line-height: 1.6; }
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13,5,5,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(140,21,21,0.3);
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; height: 64px; max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  .logo { font-weight: 700; color: #f5f0e4; text-decoration: none; }
+  .logo span { color: var(--accent2); }
+  .back-link { font-size: 0.85rem; color: var(--sand); text-decoration: none; }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  .room-hero {
+    display: grid; grid-template-columns: 320px 1fr; gap: 48px; align-items: center;
+    padding: 60px 0 40px;
+  }
+  .room-hero .art {
+    border-radius: 20px; overflow: hidden; aspect-ratio: 3/4;
+    border: 1px solid rgba(140,21,21,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  }
+  .room-hero .art svg { width: 100%; height: 100%; display: block; }
+  .room-badge {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 2px; font-weight: 700;
+    color: #d2c295; background: rgba(140,21,21,0.6); border: 1px solid rgba(210,194,149,0.3);
+    border-radius: 20px; padding: 5px 14px; margin-bottom: 16px;
+  }
+  .room-hero h1 { font-size: 2rem; margin-bottom: 16px; }
+  .room-hero .hook { color: #c8a868; font-size: 1.05rem; font-style: italic; margin-bottom: 8px; }
+
+  .detail { padding: 20px 0 70px; }
+  .detail h2 { font-size: 1.2rem; color: var(--sand); margin-bottom: 12px; }
+  .detail p { color: #d8cfc2; margin-bottom: 28px; max-width: 640px; }
+  .twist-box {
+    background: rgba(140,21,21,0.12); border: 1px solid rgba(140,21,21,0.35);
+    border-radius: 14px; padding: 22px 26px; margin-bottom: 40px; max-width: 640px;
+  }
+  .twist-box .label { font-size: 0.78rem; letter-spacing: 1.5px; color: var(--accent2); font-weight: 700; margin-bottom: 8px; }
+  .twist-box p { color: #f0e6d8; margin-bottom: 0; font-style: italic; }
+
+  .room-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid rgba(140,21,21,0.2); }
+  .room-nav a { color: var(--sand); font-size: 0.9rem; text-decoration: none; font-weight: 600; }
+  .cta-btn {
+    display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 28px; text-decoration: none;
+    box-shadow: 0 10px 30px rgba(140,21,21,0.35);
+  }
+
+  @media (max-width: 760px) {
+    .room-hero { grid-template-columns: 1fr; }
+    .room-hero .art { max-width: 280px; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="logo" href="index.html">The <span>Core</span> Room</a>
+    <a class="back-link" href="rooms.html">← All Rooms</a>
+  </div>
+</nav>
+
+<div class="container room-hero">
+  <div class="art">
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="r1bg" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#2a1010"/>
+          <stop offset="100%" stop-color="#080303"/>
+        </radialGradient>
+        <filter id="glow1"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="300" height="400" fill="url(#r1bg)"/>
+      <rect x="20" y="30" width="260" height="260" rx="4" fill="#1a0a0a" stroke="#3a1515" stroke-width="1.5"/>
+      <rect x="35" y="50" width="52" height="42" rx="3" fill="#f5e642" transform="rotate(-3 35 50)"/>
+      <text x="61" y="66" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">Seminar</text>
+      <text x="61" y="76" text-anchor="middle" font-size="6" fill="#555" font-family="sans-serif">Mon 9AM</text>
+      <rect x="96" y="44" width="52" height="42" rx="3" fill="#f9a825" transform="rotate(2 96 44)"/>
+      <text x="122" y="60" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">Internship</text>
+      <text x="122" y="70" text-anchor="middle" font-size="6" fill="#555" font-family="sans-serif">Due Fri</text>
+      <rect x="158" y="48" width="52" height="42" rx="3" fill="#81d4fa" transform="rotate(-1 158 48)"/>
+      <text x="184" y="64" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">Networking</text>
+      <text x="184" y="74" text-anchor="middle" font-size="6" fill="#555" font-family="sans-serif">Wed 7PM</text>
+      <rect x="218" y="42" width="52" height="42" rx="3" fill="#ce93d8" transform="rotate(3 218 42)"/>
+      <text x="244" y="58" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">Workout</text>
+      <text x="244" y="68" text-anchor="middle" font-size="6" fill="#555" font-family="sans-serif">Daily</text>
+      <rect x="40" y="105" width="52" height="42" rx="3" fill="#a5d6a7" transform="rotate(2 40 105)"/>
+      <text x="66" y="121" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">Research</text>
+      <rect x="100" y="100" width="52" height="42" rx="3" fill="#f48fb1" transform="rotate(-2 100 100)"/>
+      <text x="126" y="116" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">Club Retreat</text>
+      <rect x="162" y="103" width="52" height="42" rx="3" fill="#fff176" transform="rotate(1 162 103)"/>
+      <text x="188" y="119" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">Reading</text>
+      <rect x="222" y="98" width="52" height="42" rx="3" fill="#ffcc80" transform="rotate(-3 222 98)"/>
+      <text x="248" y="114" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">Counseling</text>
+      <rect x="45" y="163" width="52" height="42" rx="3" fill="#f5e642" opacity="0.18" transform="rotate(-4 45 163)"/>
+      <line x1="45" y1="163" x2="97" y2="205" stroke="#8c1515" stroke-width="1.5" opacity="0.5"/>
+      <rect x="105" y="158" width="52" height="42" rx="3" fill="#f9a825" opacity="0.18" transform="rotate(3 105 158)"/>
+      <line x1="105" y1="158" x2="157" y2="200" stroke="#8c1515" stroke-width="1.5" opacity="0.5"/>
+      <rect x="110" y="218" width="80" height="62" rx="8" fill="#1a0808" stroke="#8c1515" stroke-width="2"/>
+      <rect x="122" y="230" width="56" height="38" rx="4" fill="#2a0f0f"/>
+      <text x="150" y="255" text-anchor="middle" font-size="18" fill="#c8695a" font-family="monospace" font-weight="bold" filter="url(#glow1)">• • •</text>
+      <path d="M128,218 Q128,200 150,200 Q172,200 172,218" fill="none" stroke="#8c1515" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="150" cy="340" r="28" fill="rgba(140,21,21,0.12)" stroke="rgba(140,21,21,0.3)" stroke-width="1"/>
+      <text x="150" y="336" text-anchor="middle" font-size="20" fill="#8c1515" filter="url(#glow1)">🗝</text>
+      <text x="150" y="356" text-anchor="middle" font-size="8" fill="#c8695a" letter-spacing="1" font-family="sans-serif">FIND THE CODE</text>
+    </svg>
+  </div>
+  <div>
+    <span class="room-badge">ROOM 01</span>
+    <h1>The Decluttering Room</h1>
+    <p class="hook">"Keep everything, and the door stays shut."</p>
+  </div>
+</div>
+
+<div class="container detail">
+  <h2>What's Inside</h2>
+  <p>The walls are covered in to-do sticky notes for seminars, networking, internship prep, and workouts — and a numeric lock code is hidden somewhere among them. If you try to keep every single task, the code will never line up.</p>
+
+  <div class="twist-box">
+    <div class="label">THE TWIST</div>
+    <p>Only by boldly tearing some sticky notes off the wall do the remaining tasks line up into the lock code.</p>
+  </div>
+
+  <div class="room-nav">
+    <a href="rooms.html">← Back to all rooms</a>
+    <a class="cta-btn" href="room2.html">Next: The Mirror Room →</a>
+  </div>
+</div>
+
+</body>
+</html>

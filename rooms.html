@@ -47,7 +47,7 @@
   }
   .room-card {
     position: relative; border-radius: 20px; overflow: hidden;
-    cursor: default; text-decoration: none; display: block;
+    cursor: pointer; text-decoration: none; display: block;
     aspect-ratio: 3/4;
     background: #1a0808;
     border: 1px solid rgba(140,21,21,0.25);
@@ -80,7 +80,10 @@
     display: inline-flex; align-items: center; gap: 6px;
     margin-top: 14px; font-size: 0.78rem; font-weight: 700;
     color: #d2c295; letter-spacing: 1px;
+    border-bottom: 1px solid rgba(210,194,149,0.4); padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
   }
+  .room-card:hover .room-enter { color: #fff; border-color: #fff; }
 
   .cta-wrap { text-align: center; padding: 30px 0 90px; }
   .cta-btn {
@@ -114,7 +117,7 @@
   <div class="room-grid">
 
     <!-- ROOM 1 -->
-    <div class="room-card">
+    <a class="room-card" href="room1.html">
       <svg class="room-art" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="r1bg" cx="50%" cy="40%" r="60%">
@@ -162,12 +165,12 @@
         <span class="room-badge">ROOM 01</span>
         <h3>The Decluttering Room</h3>
         <p>A lock code hides inside a wall plastered with to-do notes. Hoard every single one and it never opens.</p>
-        <span class="room-enter">🔒 Locked until you let go</span>
+        <span class="room-enter">Step Inside →</span>
       </div>
-    </div>
+    </a>
 
     <!-- ROOM 2 -->
-    <div class="room-card">
+    <a class="room-card" href="room2.html">
       <svg class="room-art" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="r2bg" cx="50%" cy="50%" r="65%">
@@ -207,12 +210,12 @@
         <span class="room-badge">ROOM 02</span>
         <h3>The Mirror Room</h3>
         <p>There's no right answer here. Whatever you pick becomes the key that opens the next door.</p>
-        <span class="room-enter">🔒 Locked until you choose</span>
+        <span class="room-enter">Step Inside →</span>
       </div>
-    </div>
+    </a>
 
     <!-- ROOM 3 -->
-    <div class="room-card">
+    <a class="room-card" href="room3.html">
       <svg class="room-art" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="r3bg" cx="50%" cy="45%" r="65%">
@@ -254,9 +257,9 @@
         <span class="room-badge">ROOM 03</span>
         <h3>The Core Design Studio</h3>
         <p>Only the 3 things you can truly commit to will complete the board and open the final door.</p>
-        <span class="room-enter">🔒 Locked until you decide</span>
+        <span class="room-enter">Step Inside →</span>
       </div>
-    </div>
+    </a>
 
   </div>
 </div>

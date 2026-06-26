@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room 03: The Core Design Studio | The Core Room</title>
+<style>
+  :root { --accent: #8c1515; --accent2: #b83232; --sand: #d2c295; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: #0d0505; color: #f5f0e4; font-family: "Segoe UI", "Pretendard", sans-serif; line-height: 1.6; }
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13,5,5,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(140,21,21,0.3);
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; height: 64px; max-width: 980px; margin: 0 auto; padding: 0 24px; }
+  .logo { font-weight: 700; color: #f5f0e4; text-decoration: none; }
+  .logo span { color: var(--accent2); }
+  .back-link { font-size: 0.85rem; color: var(--sand); text-decoration: none; }
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  .room-hero {
+    display: grid; grid-template-columns: 320px 1fr; gap: 48px; align-items: center;
+    padding: 60px 0 40px;
+  }
+  .room-hero .art {
+    border-radius: 20px; overflow: hidden; aspect-ratio: 3/4;
+    border: 1px solid rgba(210,168,74,0.4); box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  }
+  .room-hero .art svg { width: 100%; height: 100%; display: block; }
+  .room-badge {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 2px; font-weight: 700;
+    color: #d2c295; background: rgba(140,21,21,0.6); border: 1px solid rgba(210,194,149,0.3);
+    border-radius: 20px; padding: 5px 14px; margin-bottom: 16px;
+  }
+  .room-hero h1 { font-size: 2rem; margin-bottom: 16px; }
+  .room-hero .hook { color: #c8a868; font-size: 1.05rem; font-style: italic; margin-bottom: 8px; }
+
+  .detail { padding: 20px 0 70px; }
+  .detail h2 { font-size: 1.2rem; color: var(--sand); margin-bottom: 12px; }
+  .detail p { color: #d8cfc2; margin-bottom: 28px; max-width: 640px; }
+  .twist-box {
+    background: rgba(140,21,21,0.12); border: 1px solid rgba(140,21,21,0.35);
+    border-radius: 14px; padding: 22px 26px; margin-bottom: 40px; max-width: 640px;
+  }
+  .twist-box .label { font-size: 0.78rem; letter-spacing: 1.5px; color: var(--accent2); font-weight: 700; margin-bottom: 8px; }
+  .twist-box p { color: #f0e6d8; margin-bottom: 0; font-style: italic; }
+
+  .room-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid rgba(140,21,21,0.2); }
+  .room-nav a { color: var(--sand); font-size: 0.9rem; text-decoration: none; font-weight: 600; }
+  .cta-btn {
+    display: inline-block; background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; font-weight: 700; padding: 14px 32px; border-radius: 28px; text-decoration: none;
+    box-shadow: 0 10px 30px rgba(140,21,21,0.35);
+  }
+
+  @media (max-width: 760px) {
+    .room-hero { grid-template-columns: 1fr; }
+    .room-hero .art { max-width: 280px; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="logo" href="index.html">The <span>Core</span> Room</a>
+    <a class="back-link" href="rooms.html">← All Rooms</a>
+  </div>
+</nav>
+
+<div class="container room-hero">
+  <div class="art">
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="r3bg" cx="50%" cy="45%" r="65%">
+          <stop offset="0%" stop-color="#1a1205"/>
+          <stop offset="100%" stop-color="#060402"/>
+        </radialGradient>
+        <filter id="glow3"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <rect width="300" height="400" fill="url(#r3bg)"/>
+      <rect x="30" y="40" width="240" height="200" rx="8" fill="#120e03" stroke="#d2a84a" stroke-width="1.5" opacity="0.8"/>
+      <text x="150" y="62" text-anchor="middle" font-size="9" fill="#d2a84a" letter-spacing="2" font-family="sans-serif">MY CORE TIMELINE</text>
+      <line x1="50" y1="100" x2="250" y2="100" stroke="#d2a84a" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="80" cy="100" r="7" fill="#d2a84a" opacity="0.9" filter="url(#glow3)"/>
+      <circle cx="150" cy="100" r="7" fill="#8c1515" opacity="0.9" filter="url(#glow3)"/>
+      <circle cx="220" cy="100" r="7" fill="#d2a84a" opacity="0.4"/>
+      <rect x="48" y="118" width="58" height="36" rx="5" fill="#1e1608" stroke="#d2a84a" stroke-width="1"/>
+      <text x="77" y="132" text-anchor="middle" font-size="7" fill="#d2a84a" font-family="sans-serif">Bold Challenge</text>
+      <text x="77" y="144" text-anchor="middle" font-size="6" fill="#a89050" font-family="sans-serif">✓ Selected</text>
+      <rect x="120" y="118" width="58" height="36" rx="5" fill="#200808" stroke="#8c1515" stroke-width="1.5"/>
+      <text x="149" y="132" text-anchor="middle" font-size="7" fill="#c8695a" font-family="sans-serif">Deep Focus</text>
+      <text x="149" y="144" text-anchor="middle" font-size="6" fill="#8c1515" font-family="sans-serif">✓ Selected</text>
+      <rect x="192" y="118" width="58" height="36" rx="5" fill="#1a1608" stroke="#d2a84a" stroke-width="1" opacity="0.5" stroke-dasharray="3,2"/>
+      <text x="221" y="132" text-anchor="middle" font-size="7" fill="#6a5a30" font-family="sans-serif">???</text>
+      <rect x="52" y="172" width="46" height="28" rx="4" fill="#222" stroke="#555" stroke-width="1" opacity="0.4" transform="rotate(-5 52 172)"/>
+      <text x="75" y="189" text-anchor="middle" font-size="6.5" fill="#666" font-family="sans-serif">Like Others</text>
+      <rect x="108" y="168" width="46" height="28" rx="4" fill="#222" stroke="#555" stroke-width="1" opacity="0.4" transform="rotate(3 108 168)"/>
+      <text x="131" y="185" text-anchor="middle" font-size="6.5" fill="#666" font-family="sans-serif">Résumé Padding</text>
+      <rect x="168" y="172" width="46" height="28" rx="4" fill="#222" stroke="#555" stroke-width="1" opacity="0.4" transform="rotate(-2 168 172)"/>
+      <text x="191" y="189" text-anchor="middle" font-size="6.5" fill="#666" font-family="sans-serif">Perfectly</text>
+      <rect x="95" y="265" width="110" height="100" rx="6" fill="#0a0703" stroke="#d2a84a" stroke-width="2"/>
+      <rect x="105" y="275" width="90" height="80" rx="4" fill="#120e03" stroke="#d2a84a" stroke-width="1" opacity="0.5"/>
+      <circle cx="185" cy="315" r="8" fill="none" stroke="#d2a84a" stroke-width="2" filter="url(#glow3)"/>
+      <circle cx="185" cy="315" r="3" fill="#d2a84a"/>
+      <line x1="150" y1="275" x2="150" y2="355" stroke="#d2c295" stroke-width="1.5" opacity="0.25"/>
+      <text x="150" y="380" text-anchor="middle" font-size="8" fill="#d2a84a" letter-spacing="1.5" font-family="sans-serif" opacity="0.8">DESIGN YOUR CORE</text>
+    </svg>
+  </div>
+  <div>
+    <span class="room-badge">ROOM 03</span>
+    <h1>The Core Design Studio</h1>
+    <p class="hook">"Fit in everything everyone else picked, and the board stays empty."</p>
+  </div>
+</div>
+
+<div class="container detail">
+  <h2>What's Inside</h2>
+  <p>A large timeline board sits at the center of the room. Fill in the blanks using the Key Items and value cards you collected in Rooms 1 and 2. Complete the board to unlock the final door.</p>
+
+  <div class="twist-box">
+    <div class="label">THE TWIST</div>
+    <p>Cards picked just because "everyone else picks them" won't complete the board. Only "the 3 things I can truly commit to" will open the door.</p>
+  </div>
+
+  <div class="room-nav">
+    <a href="room2.html">← The Mirror Room</a>
+    <a class="cta-btn" href="index.html#scheduler">Book Your Slot →</a>
+  </div>
+</div>
+
+</body>
+</html>
