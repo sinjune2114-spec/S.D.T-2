@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>첫 번째 웹 페이지</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6a11cb 0%, #8e2de2 50%, #a855f7 100%);
+    font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    text-align: center;
+  }
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    max-width: 400px;
+  }
+  h1 {
+    margin: 0 0 12px;
+    font-size: 2rem;
+    color: #333;
+  }
+  p {
+    margin: 0 0 24px;
+    color: #666;
+    font-size: 1rem;
+  }
+  button {
+    background: linear-gradient(135deg, #8e2de2, #6a11cb);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  button:hover {
+    transform: translateY(-2px);
+  }
+  #result {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #6a11cb;
+    min-height: 1.5rem;
+  }
+  footer {
+    margin-top: 30px;
+    font-size: 0.75rem;
+    color: #aaa;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>안녕하세요 👋</h1>
+    <p>제 첫 번째 웹 페이지예요</p>
+    <button onclick="document.getElementById('result').textContent = '🎉 잘 작동해요!'">눌러보기</button>
+    <div id="result"></div>
+    <footer>LG U+ Lifestyle Innovation Workshop</footer>
+  </div>
+</body>
+</html>
