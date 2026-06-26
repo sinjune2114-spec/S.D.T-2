@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>안녕하세요</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6a11cb 0%, #8e54e9 50%, #b06ab3 100%);
+    font-family: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    text-align: center;
+    color: #333;
+    position: relative;
+  }
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    max-width: 90%;
+    width: 380px;
+  }
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+  p.subtitle {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 28px;
+  }
+  button {
+    border: none;
+    background: linear-gradient(135deg, #8e54e9, #6a11cb);
+    color: #fff;
+    font-size: 1rem;
+    padding: 12px 28px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+  }
+  #result {
+    margin-top: 22px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #6a11cb;
+    min-height: 1.5em;
+  }
+  footer {
+    position: fixed;
+    bottom: 14px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>안녕하세요 👋</h1>
+    <p class="subtitle">제 첫 번째 웹 페이지예요</p>
+    <button onclick="document.getElementById('result').textContent='🎉 잘 작동해요!'">눌러보기</button>
+    <div id="result"></div>
+  </div>
+  <footer>LG U+ Lifestyle Innovation Workshop</footer>
+</body>
+</html>
