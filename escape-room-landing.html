@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNLOCK YOURSELF — Stanford Escape Room Experience</title>
+<style>
+  :root {
+    --bg: #0a0a12;
+    --neon-pink: #ff2e9a;
+    --neon-cyan: #00f0ff;
+    --neon-purple: #a855f7;
+    --neon-yellow: #faff00;
+    --card-bg: #14141f;
+    --text-dim: #9b9bb0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: #fff;
+    font-family: "Pretendard", "Apple SD Gothic Neo", -apple-system, "Segoe UI", sans-serif;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- background fx ---------- */
+  .glow-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(255,46,154,0.25), transparent 40%),
+      radial-gradient(circle at 85% 10%, rgba(0,240,255,0.2), transparent 40%),
+      radial-gradient(circle at 50% 80%, rgba(168,85,247,0.25), transparent 45%),
+      var(--bg);
+  }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+    backdrop-filter: blur(10px);
+    background: rgba(10,10,18,0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .nav-cta {
+    background: var(--neon-yellow);
+    color: #0a0a12;
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 6%;
+    position: relative;
+  }
+  .tag {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid var(--neon-cyan);
+    border-radius: 999px;
+    color: var(--neon-cyan);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+  .hero h1 {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+  .hero h1 .accent {
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p.sub {
+    margin-top: 22px;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-dim);
+    max-width: 560px;
+  }
+  .hero-ctas {
+    margin-top: 36px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+    color: #fff;
+    box-shadow: 0 0 25px rgba(255,46,154,0.5);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 35px rgba(255,46,154,0.7); }
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+  }
+  .btn-secondary:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+
+  .scarcity {
+    margin-top: 28px;
+    font-size: 0.85rem;
+    color: var(--neon-yellow);
+    font-weight: 700;
+  }
+
+  /* ---------- section shared ---------- */
+  section { padding: 100px 6%; max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    color: var(--neon-pink);
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    line-height: 1.25;
+  }
+  .section-desc {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    max-width: 640px;
+    margin-bottom: 50px;
+  }
+
+  /* ---------- insight / why ---------- */
+  .insight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .insight-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 28px;
+  }
+  .insight-card .icon { font-size: 2rem; margin-bottom: 14px; }
+  .insight-card h3 { font-size: 1.1rem; margin-bottom: 8px; font-weight: 800; }
+  .insight-card p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
+
+  /* ---------- quest map ---------- */
+  .quest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .quest-item {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 22px;
+    align-items: start;
+    background: var(--card-bg);
+    border-radius: 18px;
+    padding: 26px;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .quest-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(168,85,247,0.08));
+    pointer-events: none;
+  }
+  .quest-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--neon-purple);
+    opacity: 0.6;
+  }
+  .quest-item h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; }
+  .quest-item .quest-trait {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--neon-cyan);
+    background: rgba(0,240,255,0.08);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .quest-item p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
+
+  /* ---------- AI report ---------- */
+  .report-mock {
+    background: var(--card-bg);
+    border-radius: 22px;
+    padding: 36px;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+  .report-mock h3 {
+    font-size: 1rem;
+    color: var(--neon-yellow);
+    font-weight: 800;
+    margin-bottom: 18px;
+  }
+  .bar-row { margin-bottom: 16px; }
+  .bar-row .label { font-size: 0.88rem; color: var(--text-dim); margin-bottom: 6px; display:flex; justify-content: space-between; }
+  .bar-track { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan)); }
+  .report-verdict {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .report-verdict span { color: var(--neon-purple); }
+
+  /* ---------- reservation ---------- */
+  .reserve-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (max-width: 768px) { .reserve-wrap { grid-template-columns: 1fr; } }
+  .reserve-info ul { margin-top: 18px; color: var(--text-dim); line-height: 1.8; font-size: 0.95rem; }
+  .reserve-info li { margin-bottom: 6px; }
+  .reserve-form {
+    background: var(--card-bg);
+    border-radius: 22px;
+    padding: 32px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .reserve-form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-top: 18px;
+    color: var(--text-dim);
+  }
+  .reserve-form input, .reserve-form select {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: #0c0c16;
+    color: #fff;
+    font-size: 0.95rem;
+  }
+  .reserve-form input:focus, .reserve-form select:focus {
+    outline: none;
+    border-color: var(--neon-cyan);
+  }
+  .reserve-submit {
+    width: 100%;
+    margin-top: 26px;
+    padding: 16px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+    color: #fff;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .reserve-success {
+    display: none;
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(0,240,255,0.1);
+    color: var(--neon-cyan);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  /* ---------- footer ---------- */
+  footer {
+    text-align: center;
+    padding: 50px 6% 70px;
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+</style>
+</head>
+<body>
+<div class="glow-bg"></div>
+
+<nav>
+  <div class="logo">UNLOCK://YOURSELF</div>
+  <a href="#reserve" class="nav-cta">예약하기</a>
+</nav>
+
+<section class="hero">
+  <span class="tag">STANFORD FRESHMAN EXCLUSIVE · ESCAPE ROOM</span>
+  <h1>너 자신을 <span class="accent">탈출</span>시켜봐</h1>
+  <p class="sub">
+    To-do list는 끝이 없고, 다 잘하고 싶은데 뭘 해야 할지 모르겠다면 —
+    1시간 동안 방에 갇혀서 답을 찾아보자. 진짜 너는 뭘 좋아하는 사람인지.
+  </p>
+  <div class="hero-ctas">
+    <a href="#reserve" class="btn-primary">지금 자리 잡기</a>
+    <a href="#quest" class="btn-secondary">기획안 보기</a>
+  </div>
+  <div class="scarcity">⏳ 이번 학기 슬롯 한정 — Week 1~3 예약 70% 마감</div>
+</section>
+
+<section id="why">
+  <div class="section-tag">WHY THIS EXISTS</div>
+  <h2 class="section-title">불안한 건 너의 잘못이 아니라,<br>너 자신을 모르는 게 문제야</h2>
+  <p class="section-desc">
+    Gen Z는 동시에 너무 많은 걸 잘해야 한다는 압박 속에 산다.
+    수업, 동아리, 인턴, 네트워킹, 사이드 프로젝트... 다 잘하고 싶은 마음이 오히려
+    "나만 못하고 있나?"라는 FOMO와 불안으로 이어진다. 그 뿌리는 단 하나 —
+    <b>내가 뭘 잘하고, 뭘 좋아하는지에 대한 확신이 없다는 것.</b>
+  </p>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="icon">⏱️</div>
+      <h3>Time Pressure</h3>
+      <p>제한된 시간 안에 해야 할 일이 너무 많다. 선택과 우선순위 자체가 스트레스가 된다.</p>
+    </div>
+    <div class="insight-card">
+      <div class="icon">🌀</div>
+      <h3>Perfection Anxiety</h3>
+      <p>다 잘하고 싶은 마음이 "나는 충분하지 않다"는 불안감으로 변한다.</p>
+    </div>
+    <div class="insight-card">
+      <div class="icon">📱</div>
+      <h3>FOMO Loop</h3>
+      <p>남들은 다 뭔가 하고 있는 것처럼 보여서, 멈춰서 나를 들여다볼 시간이 없다.</p>
+    </div>
+    <div class="insight-card">
+      <div class="icon">🔑</div>
+      <h3>The Real Fix</h3>
+      <p>방향을 잃은 게 아니라 자기 확신이 없는 것. 행동 데이터로 너를 보여줄게.</p>
+    </div>
+  </div>
+</section>
+
+<section id="quest">
+  <div class="section-tag">GAME DESIGN · THE PLAN</div>
+  <h2 class="section-title">4개의 방, 4개의 단서<br>모든 선택이 너의 데이터가 된다</h2>
+  <p class="section-desc">
+    각 방의 퍼즐은 단순히 "탈출"이 목적이 아니야. 네가 어떤 방식으로 문제를 풀고,
+    어디서 망설이고, 무엇에 몰입하는지를 기록해서 너의 행동 패턴을 읽어내는 게 진짜 목적이야.
+  </p>
+  <div class="quest-list">
+    <div class="quest-item">
+      <div class="quest-num">01</div>
+      <div>
+        <h3>The Logic Vault — 논리의 방</h3>
+        <p>암호와 퍼즐을 순서대로 풀어야 다음 문이 열린다. 혼자 풀지, 팀원에게 묻지, 패턴을 먼저 찾는지를 추적.</p>
+        <span class="quest-trait">분석적 사고 / 문제해결 스타일</span>
+      </div>
+    </div>
+    <div class="quest-item">
+      <div class="quest-num">02</div>
+      <div>
+        <h3>The Empty Stage — 표현의 방</h3>
+        <p>제한된 도구로 무언가를 만들거나 설명해야 통과되는 방. 정답이 없는 미션에서 너의 선택을 본다.</p>
+        <span class="quest-trait">창의성 / 표현 방식</span>
+      </div>
+    </div>
+    <div class="quest-item">
+      <div class="quest-num">03</div>
+      <div>
+        <h3>The Trust Chamber — 협업의 방</h3>
+        <p>팀원과 정보를 나눠 가진 상태에서만 풀리는 미션. 리드하는지, 따라가는지, 중재하는지를 기록.</p>
+        <span class="quest-trait">리더십 / 협업 포지션</span>
+      </div>
+    </div>
+    <div class="quest-item">
+      <div class="quest-num">04</div>
+      <div>
+        <h3>The Last Door — 결단의 방</h3>
+        <p>시간이 거의 다 됐을 때, 두 가지 선택 중 하나만 고를 수 있다. 압박 속에서의 의사결정 패턴을 본다.</p>
+        <span class="quest-trait">위험 감수 성향 / 결단력</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="report">
+  <div class="section-tag">AFTER THE ESCAPE</div>
+  <h2 class="section-title">탈출 후, AI가 너의<br>적성 리포트를 보여줄게</h2>
+  <p class="section-desc">
+    4개의 방에서 모인 모든 행동 데이터를 AI가 분석해서 너만의 성향 리포트를 만들어.
+    "나는 어떤 사람인가"에 대한 첫 번째 데이터 기반 답.
+  </p>
+  <div class="report-mock">
+    <h3>🧠 YOUR ESCAPE PROFILE</h3>
+    <div class="bar-row">
+      <div class="label"><span>분석적 사고</span><span>82%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="label"><span>창의적 표현</span><span>64%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:64%"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="label"><span>협업 리더십</span><span>71%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:71%"></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="label"><span>위기 결단력</span><span>58%</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:58%"></div></div>
+    </div>
+    <div class="report-verdict">
+      "당신은 <span>구조를 먼저 파악하고 움직이는 전략가형</span>입니다.
+      불확실함 속에서도 데이터를 모아 판단하는 걸 즐기는 타입이에요."
+    </div>
+  </div>
+</section>
+
+<section id="reserve">
+  <div class="section-tag">BOOK YOUR ESCAPE</div>
+  <h2 class="section-title">친구들이랑 1시간,<br>너를 알아가는 시간</h2>
+  <div class="reserve-wrap">
+    <div class="reserve-info">
+      <p class="section-desc" style="margin-bottom:0">
+        2~5인 팀으로 진행되는 60분 체험. 끝나면 AI 분석 리포트가 이메일로 도착해.
+      </p>
+      <ul>
+        <li>📍 Stanford 캠퍼스 인근 도보 10분</li>
+        <li>⏱️ 60분 게임 + 10분 리포트 브리핑</li>
+        <li>👥 2인~5인 팀 단위 예약</li>
+        <li>📩 AI 적성 리포트 24시간 내 이메일 발송</li>
+        <li>🎓 Freshman 인증 시 10% 할인</li>
+      </ul>
+    </div>
+    <form class="reserve-form" id="reserveForm">
+      <label for="name">이름</label>
+      <input id="name" type="text" placeholder="홍길동" required>
+
+      <label for="email">스탠포드 이메일</label>
+      <input id="email" type="email" placeholder="you@stanford.edu" required>
+
+      <label for="team">팀 인원</label>
+      <select id="team">
+        <option>2명</option>
+        <option>3명</option>
+        <option>4명</option>
+        <option>5명</option>
+      </select>
+
+      <label for="date">희망 날짜</label>
+      <input id="date" type="date" required>
+
+      <button type="submit" class="reserve-submit">예약 확정하기 🔓</button>
+      <div class="reserve-success" id="reserveSuccess">✅ 예약 요청 완료! 확인 메일을 곧 보낼게요.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  UNLOCK://YOURSELF — Escape Room for Self-Discovery · Stanford Edition<br>
+  LG U+ Lifestyle Innovation Workshop
+</footer>
+
+<script>
+  document.getElementById('reserveForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('reserveSuccess').style.display = 'block';
+  });
+</script>
+</body>
+</html>
