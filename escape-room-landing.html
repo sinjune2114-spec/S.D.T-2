@@ -3,36 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UNLOCK YOURSELF — Stanford Escape Room Experience</title>
+<title>ANOTHER DOOR — Stanford Escape Room Experience</title>
 <style>
   :root {
-    --bg: #0a0a12;
-    --neon-pink: #ff2e9a;
-    --neon-cyan: #00f0ff;
-    --neon-purple: #a855f7;
-    --neon-yellow: #faff00;
-    --card-bg: #14141f;
-    --text-dim: #9b9bb0;
+    --bg: #0a0807;
+    --red: #e0243c;
+    --red-deep: #8c0f22;
+    --gold: #d9a857;
+    --amber: #ffb454;
+    --card-bg: #161210;
+    --line: rgba(217,168,87,0.18);
+    --text-dim: #b8aea3;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
     background: var(--bg);
-    color: #fff;
+    color: #f3ece4;
     font-family: "Pretendard", "Apple SD Gothic Neo", -apple-system, "Segoe UI", sans-serif;
     overflow-x: hidden;
   }
   a { color: inherit; text-decoration: none; }
 
-  /* ---------- background fx ---------- */
+  /* ---------- ambient bg ---------- */
   .glow-bg {
     position: fixed;
     inset: 0;
     z-index: -1;
     background:
-      radial-gradient(circle at 15% 20%, rgba(255,46,154,0.25), transparent 40%),
-      radial-gradient(circle at 85% 10%, rgba(0,240,255,0.2), transparent 40%),
-      radial-gradient(circle at 50% 80%, rgba(168,85,247,0.25), transparent 45%),
+      radial-gradient(ellipse at 50% 0%, rgba(224,36,60,0.12), transparent 55%),
+      radial-gradient(circle at 10% 80%, rgba(217,168,87,0.08), transparent 40%),
+      radial-gradient(circle at 90% 70%, rgba(217,168,87,0.06), transparent 40%),
       var(--bg);
   }
 
@@ -46,71 +47,165 @@
     align-items: center;
     padding: 18px 6%;
     backdrop-filter: blur(10px);
-    background: rgba(10,10,18,0.7);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(10,8,7,0.75);
+    border-bottom: 1px solid var(--line);
   }
   .logo {
     font-weight: 900;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-size: 1.15rem;
+    letter-spacing: 3px;
+    color: var(--red);
+    text-shadow: 0 0 18px rgba(224,36,60,0.6);
   }
   .nav-cta {
-    background: var(--neon-yellow);
-    color: #0a0a12;
+    background: var(--gold);
+    color: #1a1108;
     padding: 9px 18px;
-    border-radius: 999px;
+    border-radius: 4px;
     font-weight: 800;
     font-size: 0.85rem;
+    letter-spacing: 0.5px;
   }
 
-  /* ---------- hero ---------- */
+  /* ---------- hero : corridor scene ---------- */
   .hero {
-    min-height: 92vh;
+    position: relative;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     text-align: center;
-    padding: 60px 6%;
-    position: relative;
+    padding: 0 6% 70px;
+    overflow: hidden;
   }
+  .corridor {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 38% 70% at 50% 38%, rgba(255,200,140,0.55), rgba(255,150,90,0.18) 45%, transparent 70%),
+      linear-gradient(180deg, #050403 0%, #0c0908 35%, #15100c 60%, #050403 100%);
+  }
+  .corridor::before {
+    /* converging side walls to create perspective */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(100deg, rgba(0,0,0,0.85) 0%, transparent 22%, transparent 78%, rgba(0,0,0,0.85) 100%);
+  }
+  .corridor::after {
+    /* floor + vignette */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 100%, rgba(0,0,0,0.9), transparent 60%),
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,0,0,0.7), transparent 55%);
+  }
+  .sconce {
+    position: absolute;
+    top: 26%;
+    width: 60px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,180,90,0.85), rgba(255,140,60,0.25) 50%, transparent 75%);
+    filter: blur(2px);
+  }
+  .sconce.left { left: 12%; }
+  .sconce.right { right: 12%; }
+  .sconce.left2 { left: 26%; top: 40%; transform: scale(0.7); opacity: 0.7; }
+  .sconce.right2 { right: 26%; top: 40%; transform: scale(0.7); opacity: 0.7; }
+
+  .figures {
+    position: absolute;
+    bottom: 18%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    z-index: 1;
+  }
+  .figure {
+    width: 46px;
+    height: 130px;
+    position: relative;
+    opacity: 0.9;
+  }
+  .figure .head {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #0b0907;
+    margin: 0 auto;
+    box-shadow: 0 0 14px rgba(0,0,0,0.6);
+  }
+  .figure .body {
+    width: 46px;
+    height: 80px;
+    background: #0b0907;
+    border-radius: 14px 14px 4px 4px;
+    margin-top: -4px;
+    box-shadow: 0 0 14px rgba(0,0,0,0.6);
+  }
+  .figure .bag {
+    position: absolute;
+    width: 22px;
+    height: 36px;
+    background: #1c140d;
+    border-radius: 6px;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+
+  .hero-content { position: relative; z-index: 2; }
   .tag {
     display: inline-block;
     padding: 6px 16px;
-    border: 1px solid var(--neon-cyan);
-    border-radius: 999px;
-    color: var(--neon-cyan);
-    font-size: 0.75rem;
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    color: var(--gold);
+    font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 24px;
-    animation: pulse 2s infinite;
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.4);
   }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
   .hero h1 {
-    font-size: clamp(2.4rem, 7vw, 5rem);
+    font-size: clamp(2.6rem, 8vw, 5.2rem);
     font-weight: 900;
-    line-height: 1.1;
-    letter-spacing: -1px;
+    line-height: 1.08;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    text-shadow:
+      0 0 10px rgba(224,36,60,0.8),
+      0 0 30px rgba(224,36,60,0.5),
+      0 0 60px rgba(224,36,60,0.3);
   }
-  .hero h1 .accent {
-    background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple), var(--neon-cyan));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .hero h1 small {
+    display: block;
+    font-size: 0.32em;
+    letter-spacing: 6px;
+    color: #f3ece4;
+    text-shadow: none;
+    margin-top: 10px;
+    font-weight: 700;
   }
   .hero p.sub {
-    margin-top: 22px;
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin: 26px auto 0;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     color: var(--text-dim);
     max-width: 560px;
+    line-height: 1.6;
   }
   .hero-ctas {
-    margin-top: 36px;
+    margin-top: 34px;
     display: flex;
     gap: 14px;
     flex-wrap: wrap;
@@ -118,40 +213,42 @@
   }
   .btn-primary, .btn-secondary {
     padding: 16px 32px;
-    border-radius: 999px;
+    border-radius: 4px;
     font-weight: 800;
     font-size: 1rem;
     cursor: pointer;
     border: none;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+    letter-spacing: 0.5px;
   }
   .btn-primary {
-    background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+    background: var(--red);
     color: #fff;
-    box-shadow: 0 0 25px rgba(255,46,154,0.5);
+    box-shadow: 0 0 25px rgba(224,36,60,0.55);
   }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 35px rgba(255,46,154,0.7); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 38px rgba(224,36,60,0.8); }
   .btn-secondary {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.3);
-    color: #fff;
+    border: 1px solid var(--gold);
+    color: var(--gold);
   }
-  .btn-secondary:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+  .btn-secondary:hover { background: rgba(217,168,87,0.1); }
 
   .scarcity {
-    margin-top: 28px;
+    margin-top: 26px;
     font-size: 0.85rem;
-    color: var(--neon-yellow);
+    color: var(--amber);
     font-weight: 700;
+    letter-spacing: 0.3px;
   }
 
   /* ---------- section shared ---------- */
   section { padding: 100px 6%; max-width: 1100px; margin: 0 auto; }
   .section-tag {
-    color: var(--neon-pink);
+    color: var(--red);
     font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+    font-size: 0.78rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
   }
   .section-title {
@@ -159,13 +256,14 @@
     font-weight: 900;
     margin-top: 10px;
     margin-bottom: 16px;
-    line-height: 1.25;
+    line-height: 1.3;
   }
   .section-desc {
     color: var(--text-dim);
     font-size: 1.05rem;
     max-width: 640px;
     margin-bottom: 50px;
+    line-height: 1.65;
   }
 
   /* ---------- insight / why ---------- */
@@ -176,12 +274,12 @@
   }
   .insight-card {
     background: var(--card-bg);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
     padding: 28px;
   }
   .insight-card .icon { font-size: 2rem; margin-bottom: 14px; }
-  .insight-card h3 { font-size: 1.1rem; margin-bottom: 8px; font-weight: 800; }
+  .insight-card h3 { font-size: 1.1rem; margin-bottom: 8px; font-weight: 800; color: var(--gold); }
   .insight-card p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
 
   /* ---------- quest map ---------- */
@@ -196,9 +294,9 @@
     gap: 22px;
     align-items: start;
     background: var(--card-bg);
-    border-radius: 18px;
+    border-radius: 10px;
     padding: 26px;
-    border: 1px solid rgba(255,255,255,0.06);
+    border: 1px solid var(--line);
     position: relative;
     overflow: hidden;
   }
@@ -206,14 +304,14 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(120deg, transparent, rgba(168,85,247,0.08));
+    background: linear-gradient(120deg, transparent, rgba(224,36,60,0.06));
     pointer-events: none;
   }
   .quest-num {
     font-size: 2rem;
     font-weight: 900;
-    color: var(--neon-purple);
-    opacity: 0.6;
+    color: var(--red);
+    opacity: 0.7;
   }
   .quest-item h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; }
   .quest-item .quest-trait {
@@ -221,39 +319,41 @@
     margin-top: 10px;
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--neon-cyan);
-    background: rgba(0,240,255,0.08);
+    color: var(--gold);
+    background: rgba(217,168,87,0.1);
     padding: 4px 10px;
-    border-radius: 999px;
+    border-radius: 4px;
   }
   .quest-item p { color: var(--text-dim); font-size: 0.92rem; line-height: 1.55; }
 
   /* ---------- AI report ---------- */
   .report-mock {
     background: var(--card-bg);
-    border-radius: 22px;
+    border-radius: 14px;
     padding: 36px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid var(--line);
     position: relative;
   }
   .report-mock h3 {
     font-size: 1rem;
-    color: var(--neon-yellow);
+    color: var(--amber);
     font-weight: 800;
     margin-bottom: 18px;
+    letter-spacing: 1px;
   }
   .bar-row { margin-bottom: 16px; }
   .bar-row .label { font-size: 0.88rem; color: var(--text-dim); margin-bottom: 6px; display:flex; justify-content: space-between; }
-  .bar-track { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan)); }
+  .bar-track { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--red-deep), var(--red)); }
   .report-verdict {
     margin-top: 24px;
     padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid var(--line);
     font-size: 1.05rem;
     font-weight: 700;
+    line-height: 1.6;
   }
-  .report-verdict span { color: var(--neon-purple); }
+  .report-verdict span { color: var(--gold); }
 
   /* ---------- reservation ---------- */
   .reserve-wrap {
@@ -267,9 +367,9 @@
   .reserve-info li { margin-bottom: 6px; }
   .reserve-form {
     background: var(--card-bg);
-    border-radius: 22px;
+    border-radius: 14px;
     padding: 32px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid var(--line);
   }
   .reserve-form label {
     display: block;
@@ -282,35 +382,36 @@
   .reserve-form input, .reserve-form select {
     width: 100%;
     padding: 13px 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: #0c0c16;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: #0d0a08;
     color: #fff;
     font-size: 0.95rem;
   }
   .reserve-form input:focus, .reserve-form select:focus {
     outline: none;
-    border-color: var(--neon-cyan);
+    border-color: var(--gold);
   }
   .reserve-submit {
     width: 100%;
     margin-top: 26px;
     padding: 16px;
     border: none;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+    border-radius: 4px;
+    background: var(--red);
     color: #fff;
     font-weight: 800;
     font-size: 1rem;
     cursor: pointer;
+    letter-spacing: 0.5px;
   }
   .reserve-success {
     display: none;
     margin-top: 18px;
     padding: 14px;
-    border-radius: 12px;
-    background: rgba(0,240,255,0.1);
-    color: var(--neon-cyan);
+    border-radius: 6px;
+    background: rgba(217,168,87,0.12);
+    color: var(--gold);
     font-weight: 700;
     font-size: 0.9rem;
     text-align: center;
@@ -322,7 +423,7 @@
     padding: 50px 6% 70px;
     color: var(--text-dim);
     font-size: 0.8rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid var(--line);
   }
 </style>
 </head>
@@ -330,26 +431,46 @@
 <div class="glow-bg"></div>
 
 <nav>
-  <div class="logo">UNLOCK://YOURSELF</div>
+  <div class="logo">ANOTHER DOOR</div>
   <a href="#reserve" class="nav-cta">예약하기</a>
 </nav>
 
 <section class="hero">
-  <span class="tag">STANFORD FRESHMAN EXCLUSIVE · ESCAPE ROOM</span>
-  <h1>너 자신을 <span class="accent">탈출</span>시켜봐</h1>
-  <p class="sub">
-    To-do list는 끝이 없고, 다 잘하고 싶은데 뭘 해야 할지 모르겠다면 —
-    1시간 동안 방에 갇혀서 답을 찾아보자. 진짜 너는 뭘 좋아하는 사람인지.
-  </p>
-  <div class="hero-ctas">
-    <a href="#reserve" class="btn-primary">지금 자리 잡기</a>
-    <a href="#quest" class="btn-secondary">기획안 보기</a>
+  <div class="corridor">
+    <div class="sconce left"></div>
+    <div class="sconce right"></div>
+    <div class="sconce left2"></div>
+    <div class="sconce right2"></div>
   </div>
-  <div class="scarcity">⏳ 이번 학기 슬롯 한정 — Week 1~3 예약 70% 마감</div>
+  <div class="figures">
+    <div class="figure">
+      <div class="bag"></div>
+      <div class="head"></div>
+      <div class="body"></div>
+    </div>
+    <div class="figure">
+      <div class="bag"></div>
+      <div class="head"></div>
+      <div class="body"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <span class="tag">Stanford Freshman Exclusive · Escape Room</span>
+    <h1>ANOTHER DOOR<small>너 자신을 탈출시켜봐</small></h1>
+    <p class="sub">
+      To-do list는 끝이 없고, 다 잘하고 싶은데 뭘 해야 할지 모르겠다면 —
+      1시간 동안 방에 갇혀서 답을 찾아보자. 문 너머엔 진짜 너가 있어.
+    </p>
+    <div class="hero-ctas">
+      <a href="#reserve" class="btn-primary">지금 자리 잡기</a>
+      <a href="#quest" class="btn-secondary">기획안 보기</a>
+    </div>
+    <div class="scarcity">⏳ 이번 학기 슬롯 한정 — Week 1~3 예약 70% 마감</div>
+  </div>
 </section>
 
 <section id="why">
-  <div class="section-tag">WHY THIS EXISTS</div>
+  <div class="section-tag">Why This Exists</div>
   <h2 class="section-title">불안한 건 너의 잘못이 아니라,<br>너 자신을 모르는 게 문제야</h2>
   <p class="section-desc">
     Gen Z는 동시에 너무 많은 걸 잘해야 한다는 압박 속에 산다.
@@ -382,8 +503,8 @@
 </section>
 
 <section id="quest">
-  <div class="section-tag">GAME DESIGN · THE PLAN</div>
-  <h2 class="section-title">4개의 방, 4개의 단서<br>모든 선택이 너의 데이터가 된다</h2>
+  <div class="section-tag">Game Design · The Plan</div>
+  <h2 class="section-title">4개의 방, 4개의 문<br>모든 선택이 너의 데이터가 된다</h2>
   <p class="section-desc">
     각 방의 퍼즐은 단순히 "탈출"이 목적이 아니야. 네가 어떤 방식으로 문제를 풀고,
     어디서 망설이고, 무엇에 몰입하는지를 기록해서 너의 행동 패턴을 읽어내는 게 진짜 목적이야.
@@ -425,7 +546,7 @@
 </section>
 
 <section id="report">
-  <div class="section-tag">AFTER THE ESCAPE</div>
+  <div class="section-tag">After The Escape</div>
   <h2 class="section-title">탈출 후, AI가 너의<br>적성 리포트를 보여줄게</h2>
   <p class="section-desc">
     4개의 방에서 모인 모든 행동 데이터를 AI가 분석해서 너만의 성향 리포트를 만들어.
@@ -457,7 +578,7 @@
 </section>
 
 <section id="reserve">
-  <div class="section-tag">BOOK YOUR ESCAPE</div>
+  <div class="section-tag">Book Your Escape</div>
   <h2 class="section-title">친구들이랑 1시간,<br>너를 알아가는 시간</h2>
   <div class="reserve-wrap">
     <div class="reserve-info">
@@ -497,7 +618,7 @@
 </section>
 
 <footer>
-  UNLOCK://YOURSELF — Escape Room for Self-Discovery · Stanford Edition<br>
+  ANOTHER DOOR — Escape Room for Self-Discovery · Stanford Edition<br>
   LG U+ Lifestyle Innovation Workshop
 </footer>
 
